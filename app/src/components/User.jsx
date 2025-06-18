@@ -9,7 +9,7 @@ const User = (props) => {
     const deleteUser =async (id)=>{
         try{
             const response = await axios.delete(`http://localhost:3000/deleteuser/${id}`)
-            console.log(response) 
+            
             
         }catch(err){
             console.log("Cannot Delete User"+err)
@@ -28,9 +28,7 @@ const User = (props) => {
                     <p className='text-zinc-400'>{props.email}</p>
                     <div className='flex w-full justify-between text-sm mt-5'>
                         <Link to={`/updateuser/${props.id}`} 
-                        onClick={()=>{
-                            getUserData(props)
-                        }}
+                      
                         className= 'text-blue-500 cursor-pointer py-1 '>Edit Details</Link>
                         <button 
                         onClick={()=>{

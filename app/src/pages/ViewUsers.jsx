@@ -30,6 +30,9 @@ const ViewUsers = () => {
       try{
          const res = await axios.delete(`http://localhost:3000/deleteallusers`)
          console.log(res.data)
+         if(res.data.deletedCount ===0){
+            return
+         }
       }catch(err){
          console.log("Error deleting All users"+err)
       }

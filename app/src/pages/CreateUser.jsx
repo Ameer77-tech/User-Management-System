@@ -19,7 +19,7 @@ const CreateUser = () => {
       ...prev,
       [name]: value,
     }));
-    console.log(e.target);
+  
   };
 
   const submit = () => {
@@ -61,6 +61,7 @@ const CreateUser = () => {
          })
          setTimeout(()=>{
             setstatus("")
+            setcreated(false)
          },1000)
 
      }, 1000);

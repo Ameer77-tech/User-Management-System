@@ -14,7 +14,7 @@ const UpdateUser = () => {
     url:"",
     })
   const params = useParams()
-  console.log(params.id)
+  
 useEffect(() => {
    const getUserData =async ()=>{
         try{
@@ -40,7 +40,7 @@ useEffect(() => {
       ...prev,
       [name]: value,
     }));
-    console.log(e.target);
+   
   };
 
   const submit = () => {
