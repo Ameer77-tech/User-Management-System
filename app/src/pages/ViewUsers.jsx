@@ -14,7 +14,7 @@ const ViewUsers = () => {
           try{
             const res = await axios.get(`http://localhost:3000/users`)
             const {users} = res.data
-            setUsers(users)
+            setUsers([...users].reverse())
             
             
          }catch(err){

@@ -20,7 +20,6 @@ useEffect(() => {
         try{
             const res = await axios.get(`http://localhost:3000/updateuser/${params.id}`)
             const data = res.data.user
-            console.log(data)
             setinputData(data)
         }catch(err){
             console.log("Error Fetching User Data To Update"+err)
@@ -67,12 +66,7 @@ useEffect(() => {
    const updateData = async ()=>{
       try{
          const res = await axios.put(`http://localhost:3000/updateuser/${params.id}`,inputData)
-         console.log(res)
-      }catch(err){
-         console.log("Error Sending Data"+err)
-      }finally{
-     setTimeout(() => {
-         setloading(false)
+          setloading(false)
          setcreated(true)
          setstatus("User Updated")
          setinputData({
@@ -83,10 +77,16 @@ useEffect(() => {
          setTimeout(()=>{
             setstatus("")
             navigate('/users')
-         },1000)
+         },500)
+      }catch(err){
+         console.log("Error Sending Data"+err)
+         setstatus("Something went wrong")
+      }
+     
+        
 
-     }, 1000);
-     }
+    
+     
    }
 
   return (
@@ -148,7 +148,7 @@ useEffect(() => {
                repeat:Infinity
 
             }}
-            className="h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"></motion.div>
+            className="mr-5 h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"></motion.div>
           ) 
          }
          {status && (

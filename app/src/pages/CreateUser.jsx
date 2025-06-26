@@ -36,38 +36,42 @@ const CreateUser = () => {
       setstatus("Invalid Email");
     } else if (url === "") {
       setstatus("Enter URL");
-    } else {
+    } 
+    else if(/^https?:\/\/.+\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url)){
+      console.log("False url")
+      setstatus("Invalid Url")
+    }
+    else {
       setstatus("");
       setloading(true)
       sendData()
     }
   };
 
-   const sendData = async ()=>{
-      try{
-         const res = await axios.post(`http://localhost:3000/create`,userData)
-         console.log(res)
-      }catch(err){
-         console.log("Error Sending Data"+err)
-      }finally{
-     setTimeout(() => {
-         setloading(false)
-         setcreated(true)
-         setstatus("User Created")
-         setuserData({
-            name:"",
-            email:"",
-            url:""
-         })
-         setTimeout(()=>{
-            setstatus("")
-            setcreated(false)
-         },1000)
+const sendData = async () => {
+  try {
+    var res = await axios.post(`http://localhost:3000/create`, userData)
+    setloading(false)
+    setcreated(true)
+    setstatus("User Created")
+    setuserData({
+      name: "",
+      email: "",
+      url: ""
+    })
+    setTimeout(() => {
+      setstatus("")
+      setcreated(false)
+    }, 1000)
+  } catch (err) {
+    setloading(false)
+    setstatus("Something went wrong")
+    console.log("Error Sending Data" + res)
+    return
+  }
+}
 
-     }, 1000);
-     }
-   }
-
+ 
   return (
     <div className="w-full h-full bg-zinc-900 flex flex-col justify-center items-center gap-5">
       <h1 className="text-4xl underline">Create a user</h1>

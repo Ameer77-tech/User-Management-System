@@ -5,15 +5,34 @@ const cors = require('cors')
 
 const userModel = require('./models/user')
 
+const limiter = require('./ratelimit')
+const { body, validationResult } = require('express-validator');
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
+require('dotenv').config();
+
+
+const PORT = process.env.PORT 
+
 app.get('/',(req,res)=>{
-    res.send("Working")
+    res.send("working")
+    
 })
 
-app.post('/create',async (req,res)=>{
+app.post('/create', limiter ,[
+    body('name').trim().notEmpty().withMessage('Name is required').escape(),
+    body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
+    body('url').optional().isURL().withMessage('URL must be valid'),
+  ],async (req,res)=>{
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({msg:"Server Error"});
+    }
+
     let {name, email, url} = req.body
     try{
      let createdUser = await userModel.create({
@@ -24,6 +43,7 @@ app.post('/create',async (req,res)=>{
     res.send({createdUser})
     }catch(err){
         console.log("Error creating User")
+         res.status(404).send()
     }
    
 })
@@ -34,6 +54,7 @@ app.get('/users',async (req,res)=>{
         res.send({users})
     }catch(err){
         console.log("Cannot get Users")
+        res.status(404).send()
     }
 })
 
