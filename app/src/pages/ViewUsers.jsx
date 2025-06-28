@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import User from '../components/User'
 import axios from 'axios'
+import { AnimatePresence, motion } from "motion/react";
 
 
 
@@ -51,14 +52,18 @@ const ViewUsers = () => {
       </div>
        
         <h1 className='mt-5 text-3xl'>ALL USERS</h1>
-        <div className='flex flex-wrap gap-7 mt-5'>
+        <div className='grid md:grid-cols-5 gap-10 mt-5 sm:grid-cols-2' layout>
+         <AnimatePresence>
+
+         
          { Users.length < 1 ? <p className='text-gray-500'>{status}</p> :
             Users.map((user,idx)=>{
                return (
-                  <User key={idx} name={user.name} email={user.email} url={user.url} id={user._id} func={getData}/>
+                  <User key={user._id} name={user.name} email={user.email} url={user.url} id={user._id} func={getData} index={idx}/>
                )
             })
          }
+         </AnimatePresence>
               
                 
         </div>

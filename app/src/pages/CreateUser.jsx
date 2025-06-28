@@ -37,10 +37,9 @@ const CreateUser = () => {
     } else if (url === "") {
       setstatus("Enter URL");
     } 
-    else if(/^https?:\/\/.+\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url)){
-      console.log("False url")
-      setstatus("Invalid Url")
-    }
+   else if (!checkImage(url)) {
+  setstatus("Invalid Url")
+}
     else {
       setstatus("");
       setloading(true)
@@ -50,7 +49,7 @@ const CreateUser = () => {
 
 const sendData = async () => {
   try {
-    var res = await axios.post(`http://localhost:3000/create`, userData)
+    const res = await axios.post(`http://localhost:3000/create`, userData)
     setloading(false)
     setcreated(true)
     setstatus("User Created")
@@ -64,12 +63,29 @@ const sendData = async () => {
       setcreated(false)
     }, 1000)
   } catch (err) {
-    setloading(false)
-    setstatus("Something went wrong")
-    console.log("Error Sending Data" + res)
-    return
+    if (err.response && err.response.data && err.response.data.msg) {
+      setstatus(err.response.data.msg) 
+      setloading(false)// Show limiter message
+    } else {
+      setstatus("Something went wrong")
+      setloading(false)
+      console.log("Error Sending Data" + err)
+      return
+    }
+   
   }
 }
+function checkImage(url) {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+// Usage:
+
 
  
   return (
@@ -131,7 +147,7 @@ const sendData = async () => {
                repeat:Infinity
 
             }}
-            className="h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"></motion.div>
+            className="mr-5 h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"></motion.div>
           ) 
          }
          {status && (
