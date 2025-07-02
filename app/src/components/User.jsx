@@ -37,8 +37,8 @@ const User = (props) => {
      viewport={{once:true}}
      transition={{
         type:"spring",
-        stiffness:30,
-        delay:props.index * 0.01,
+        stiffness:90,
+        delay:props.index * 0.010,
      
      }}
      exit={{

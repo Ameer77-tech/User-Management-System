@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "motion/react";
 import axios from 'axios'
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { FaArrowLeft, FaTrash, FaEllipsisV } from "react-icons/fa"
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const UpdateUser = () => {
 
@@ -18,7 +20,7 @@ const UpdateUser = () => {
 useEffect(() => {
    const getUserData =async ()=>{
         try{
-            const res = await axios.get(`http://localhost:3000/updateuser/${params.id}`)
+            const res = await axios.get(`${serverUrl}/updateuser/${params.id}`)
             const data = res.data.user
             setinputData(data)
         }catch(err){
@@ -45,7 +47,6 @@ useEffect(() => {
   const submit = () => {
     const { name, email, url } = inputData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(name);
     if (name === "" && email === "" && url === "") {
       setstatus("Enter Details");
     } else if (name === "") {
@@ -65,7 +66,7 @@ useEffect(() => {
 
    const updateData = async ()=>{
       try{
-         const res = await axios.put(`http://localhost:3000/updateuser/${params.id}`,inputData)
+         const res = await axios.put(`${serverUrl}/updateuser/${params.id}`,inputData)
           setloading(false)
          setcreated(true)
          setstatus("User Updated")
@@ -90,9 +91,17 @@ useEffect(() => {
    }
 
   return (
-    <div className="w-full h-full bg-zinc-900 flex flex-col justify-center items-center gap-5">
-      <h1 className="text-4xl underline">EDIT DETAILS</h1>
-      <motion.div className="bg-zinc-800 rounded w-100 p-10 flex flex-col gap-5">
+    <motion.div 
+    initial={{
+      opacity:0,
+      y:20
+     }}
+     animate={{opacity:1,y:0}}
+     transition={{duration:0.4}}
+     exit={{opacity:0,y:-20}}
+    className="w-full h-full bg-[#090c0c] flex flex-col justify-center items-center gap-5">
+      <h1 className="text-4xl font-medium underline">EDIT DETAILS</h1>
+      <motion.div className="bg-[#0f1417] rounded w-100 p-10 flex flex-col gap-5">
         <motion.input layout
           type="text"
           placeholder="Enter name"
@@ -101,7 +110,7 @@ useEffect(() => {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
         <motion.input layout
           type="text"
@@ -111,7 +120,7 @@ useEffect(() => {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
         <motion.input layout
           type="text"
@@ -121,7 +130,7 @@ useEffect(() => {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
 
         <div className="flex justify-center items-center">
@@ -172,13 +181,13 @@ useEffect(() => {
         </div>
         <button
           onClick={submit}
-          className="text-sm bg-blue-600 px-7 py-3 rounded font-medium cursor-pointer hover:bg-blue-700"
+          className="hover:shadow-2xl text-black hover:-translate-y-1 transition-all ease hover:shadow-[#37bac9] text-sm bg-[#36bbca] px-7 py-3 rounded font-medium cursor-pointer"
         >
           UPDATE
         </button>
       </motion.div>
-      <Link to='/users' className="text-blue-600">Go Back</Link>
-    </div>
+      <Link to='/users' className="text-[#2f777f] flex items-center gap-2"><FaArrowLeft/> Go Back</Link>
+    </motion.div>
   );
 };
 

@@ -3,19 +3,27 @@ import Home from './pages/Home'
 import CreateUser from './pages/CreateUser'
 import ViewUsers from './pages/ViewUsers'
 import UpdateUser from './pages/UpdateUser'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'motion/react'
 
-const App = () => {
+const AnimatedRoutes = () => {
+  const location = useLocation()
   return (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Home/>}></Route>
-            <Route path='/create' element={<CreateUser/>}></Route>
-            <Route path='/users' element={<ViewUsers/>}></Route>
-            <Route path='/updateuser/:id' element={<UpdateUser/>}></Route>
-        </Routes>
-    </BrowserRouter>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path='/' element={<Home />} />
+        <Route path='/create' element={<CreateUser />} />
+        <Route path='/users' element={<ViewUsers />} />
+        <Route path='/updateuser/:id' element={<UpdateUser />} />
+      </Routes>
+    </AnimatePresence>
   )
 }
+
+const App = () => (
+  <BrowserRouter>
+    <AnimatedRoutes />
+  </BrowserRouter>
+)
 
 export default App

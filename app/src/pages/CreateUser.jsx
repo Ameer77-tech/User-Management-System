@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import axios from 'axios'
 import { Link } from "react-router-dom";
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+import { FaEye } from 'react-icons/fa'
 
 const CreateUser = () => {
-   
+  
   const [userData, setuserData] = useState({
     name: "",
     email: "",
@@ -25,7 +27,6 @@ const CreateUser = () => {
   const submit = () => {
     const { name, email, url } = userData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(name);
     if (name === "" && email === "" && url === "") {
       setstatus("Enter Details");
     } else if (name === "") {
@@ -49,7 +50,7 @@ const CreateUser = () => {
 
 const sendData = async () => {
   try {
-    const res = await axios.post(`http://localhost:3000/create`, userData)
+    const res = await axios.post(`${serverUrl}/create`, userData)
     setloading(false)
     setcreated(true)
     setstatus("User Created")
@@ -89,9 +90,25 @@ function checkImage(url) {
 
  
   return (
-    <div className="w-full h-full bg-zinc-900 flex flex-col justify-center items-center gap-5">
-      <h1 className="text-4xl underline">Create a user</h1>
-      <motion.div className="bg-zinc-800 rounded w-100 p-10 flex flex-col gap-5">
+    <motion.div 
+    initial={{
+      opacity:0,
+      y:20
+    }}
+    animate={{
+      opacity:1,
+      y:0
+    }}
+    transition={{
+      duration:0.4
+    }}
+    exit={{
+      y:-20,
+      opacity:0
+    }}
+    className="w-full h-full bg-[#090c0c] flex flex-col justify-center items-center gap-5">
+      <h1 className="text-4xl font-medium underline">Create a user</h1>
+      <motion.div className="bg-[#0f1417] rounded w-100 p-10 flex flex-col gap-5">
         <motion.input layout
           type="text"
           placeholder="Enter name"
@@ -100,7 +117,7 @@ function checkImage(url) {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
         <motion.input layout
           type="text"
@@ -110,7 +127,7 @@ function checkImage(url) {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
         <motion.input layout
           type="text"
@@ -120,7 +137,7 @@ function checkImage(url) {
           onChange={(e) => {
             handleChange(e);
           }}
-          className="border-2 border-zinc-400 rounded px-7 py-2 outline-0"
+          className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
 
         <div className="flex justify-center items-center">
@@ -163,7 +180,7 @@ function checkImage(url) {
             ease:'easeIn'
          }}
          
-         className={`text-center ${created ? 'text-blue-400' : 'text-red-600'}  font-medium tracking-wide`}>
+         className={`text-center ${created ? 'text-[#57bac5]' : 'text-red-600'}  font-medium tracking-wide`}>
               {status}
             </motion.p> 
          )}
@@ -171,13 +188,13 @@ function checkImage(url) {
         </div>
         <button
           onClick={submit}
-          className="text-sm bg-blue-600 px-7 py-3 rounded font-medium cursor-pointer hover:bg-blue-700"
+          className="hover:shadow-2xl text-black hover:-translate-y-1 transition-all ease hover:shadow-[#37bac9] text-sm bg-[#36bbca] px-7 py-3 rounded font-medium cursor-pointer"
         >
           CREATE
         </button>
       </motion.div>
-      <Link to='/users' className="text-blue-600">View Users</Link>
-    </div>
+      <Link to='/users' className="text-[#2f777f] flex items-center gap-2"><FaEye/>View Users</Link>
+    </motion.div>
   );
 };
 
