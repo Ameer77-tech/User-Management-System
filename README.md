@@ -30,20 +30,21 @@ MongoDB installed or MongoDB Atlas URI <br> <br>
 
 
 # Backend Setup <br>
-cd backend <br>
+cd server <br>
 npm install <br>
-npm run dev <br> <br>
+node index.js or use nodemon for auto refresh <br> <br>
 
 # Frontend Setup <br>
-cd frontend <br>
+cd app <br>
 npm install <br>
-npm start <br> <br>
+npm run dev <br> <br>
 
 # 🌐 API Endpoints <br>
 POST /create – Create new user <br>
 GET /users – Get all users <br>
 PUT /updateuser/:id – Edit user details <br>
-DELETE /delete/:id – Delete a user <br> <br>
+DELETE /delete/:id – Delete a user <br>
+DELETE ALL /deleteall <br><br>
 
 # 🙌 Acknowledgements <br>
 This app was created as a personal project to practice full-stack MERN development and integrate modern animations using Framer Motion. <br><br>
