@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AnimatePresence, delay, motion } from "motion/react";
@@ -6,14 +6,21 @@ const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const User = (props) => {
   const navigate = useNavigate();
+  const [loading, setloading] = useState(false)
 
   const deleteUser = async (id) => {
+    setloading(true)
     try {
       const response = await axios.delete(`${serverUrl}/deleteuser/${id}`);
+
     } catch (err) {
       console.log("Cannot Delete User" + err);
     } finally {
       props.func();
+      setTimeout(()=>{
+        setloading(false)
+      },500)
+      
     }
   };
 
@@ -59,14 +66,41 @@ const User = (props) => {
         >
           Edit Details
         </Link>
+        <div className="flex relative bg-red-900 hover:bg-red-600 px-2 transition-all ease">
         <button
           onClick={() => {
             deleteUser(props.id);
           }}
-          className="text-red-600 cursor-pointer hover:bg-red-600 hover:text-white px-2 transition-all ease"
+          className="text-red-600 cursor-pointer  hover:text-white px-2 transition-all ease"
         >
-          Delete User
+         { loading ? 
+         <motion.div
+                        initial={{
+                          rotate: 0,
+                          opacity: 0,
+                        }}
+                        animate={{
+                          rotate: 360,
+                          opacity: 1,
+                        }}
+                        exit={{
+                          opacity: 0,
+                          transition: {
+                            opacity: 0.3,
+                          },
+                        }}
+                        transition={{
+                          opacity: 0.3,
+                          ease: "linear",
+                          duration: 1,
+                          repeat: Infinity,
+                        }}
+                        className="h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"
+                      ></motion.div>: 
+         "Delete User" }
         </button>
+        
+        </div>
       </div>
     </motion.div>
   );

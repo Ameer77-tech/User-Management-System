@@ -12,6 +12,7 @@ const ViewUsers = () => {
    const [Users, setUsers] = useState([])
    const [status, setstatus] = useState("No Users")
    const [func, setfunc] = useState(null)
+   const [loading, setloading] = useState(false)
    
     const getData =async ()=>{
           try{
@@ -30,6 +31,7 @@ const ViewUsers = () => {
    }, [])
 
    const deleteAll =async ()=>{
+      setloading(true)
       try{
          const res = await axios.delete(`${serverUrl}/deleteallusers`)
          if(res.data.deletedCount ===0){
@@ -39,7 +41,12 @@ const ViewUsers = () => {
          console.log("Error deleting All users"+err)
       }
       finally{
+         setTimeout(() => {
+               setloading(false)
+         }, 500);
+         
           getData()
+
       }
    }
 
@@ -55,7 +62,31 @@ const ViewUsers = () => {
      className='w-full min-h-screen bg-[#090c0c] p-10'>
       <div className='flex gap-5'> 
            <Link to='/' className='text-sm text-blue-600 flex gap-2 justify-center items-center'><FaArrowLeft/> Back To Home</Link>
-           <button className='flex items-center gap-2 text-sm text-red-600 relative cursor-pointer'
+          { loading ? 
+          <motion.div
+                initial={{
+                  rotate: 0,
+                  opacity: 0,
+                }}
+                animate={{
+                  rotate: 360,
+                  opacity: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    opacity: 0.3,
+                  },
+                }}
+                transition={{
+                  opacity: 0.3,
+                  ease: "linear",
+                  duration: 1,
+                  repeat: Infinity,
+                }}
+                className="mr-5 h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"
+              ></motion.div> : 
+          <button className='flex items-center gap-2 text-sm text-red-600 relative cursor-pointer'
            onClick={()=>{
            let ok =  confirm("Are You Sure?")
            if(ok){
@@ -65,7 +96,7 @@ const ViewUsers = () => {
             return;
            }
            }}
-           ><FaTrash/> Delete All Users</button>
+           ><FaTrash/> Delete All Users</button> }
       </div>
        
         <h1 className='mt-5 text-3xl'>ALL USERS</h1>
