@@ -25,7 +25,6 @@ MongoDB installed or MongoDB Atlas URI
 Backend Setup
 cd backend
 npm install
-# Create a .env file and add your MongoDB connection string
 npm run dev
 
 Frontend Setup
