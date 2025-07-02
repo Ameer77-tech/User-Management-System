@@ -49,8 +49,8 @@ const User = (props) => {
             duration: 0.3,
         }
      }}
-     className='flex-col flex bg-zinc-700 w-72 p-5 rounded'>
-                    <div className='bg-zinc-800 w-full overflow-hidden flex items-center  h-64 rounded'>
+     className='flex-col flex bg-[#0f1417] border-1 border-[#2f777f] w-72 p-5 rounded'>
+                    <div className='w-full overflow-hidden flex items-center h-64 rounded'>
                         <img className='mx-auto object-cover object-top h-full w-full' src={props.url} alt='image'></img>
                     </div>
                     <h3 className='font-mono font-medium text-lg mt-3 '>{props.name}</h3>

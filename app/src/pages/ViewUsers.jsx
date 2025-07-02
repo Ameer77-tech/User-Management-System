@@ -52,7 +52,7 @@ const ViewUsers = () => {
      animate={{opacity:1,y:0}}
      transition={{duration:0.4}}
      exit={{opacity:0,y:-20}}
-     className='w-full min-h-screen bg-zinc-900 p-10'>
+     className='w-full min-h-screen bg-[#090c0c] p-10'>
       <div className='flex gap-5'> 
            <Link to='/' className='text-sm text-blue-600 flex gap-2 justify-center items-center'><FaArrowLeft/> Back To Home</Link>
            <button className='flex items-center gap-2 text-sm text-red-600 relative cursor-pointer'
@@ -69,7 +69,7 @@ const ViewUsers = () => {
       </div>
        
         <h1 className='mt-5 text-3xl'>ALL USERS</h1>
-        <div className='grid md:grid-cols-5 gap-10 mt-5 sm:grid-cols-2' >
+        <div className='grid md:grid-cols-5 gap-12 mt-5 sm:grid-cols-2' >
          <AnimatePresence>
 
          
