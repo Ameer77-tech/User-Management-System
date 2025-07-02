@@ -1,15 +1,15 @@
-const mongoose = require('mongoose')
-require('dotenv').config(); 
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect(process.env.MONGO_URI)
-.then("DB Connected")
-.catch("Not Connected")
-
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then("DB Connected")
+  .catch("Not Connected");
 
 const userSchema = mongoose.Schema({
-    name:String,
-    email:String,
-    url:String
-})
+  name: String,
+  email: String,
+  url: String,
+});
 
-module.exports = mongoose.model('user',userSchema)
+module.exports = mongoose.model("user", userSchema);

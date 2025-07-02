@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import axios from 'axios'
+import axios from "axios";
 import { Link } from "react-router-dom";
 const serverUrl = import.meta.env.VITE_SERVER_URL;
-import { FaEye } from 'react-icons/fa'
+import { FaEye } from "react-icons/fa";
 
 const CreateUser = () => {
-  
   const [userData, setuserData] = useState({
     name: "",
     email: "",
@@ -14,14 +13,13 @@ const CreateUser = () => {
   });
   const [loading, setloading] = useState(false);
   const [status, setstatus] = useState("");
-  const [created, setcreated] = useState(false)
+  const [created, setcreated] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setuserData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  
   };
 
   const submit = () => {
@@ -37,79 +35,66 @@ const CreateUser = () => {
       setstatus("Invalid Email");
     } else if (url === "") {
       setstatus("Enter URL");
-    } 
-   else if (!checkImage(url)) {
-  setstatus("Invalid Url")
-}
-    else {
+    } else if (!checkImage(url)) {
+      setstatus("Invalid Url");
+    } else {
       setstatus("");
-      setloading(true)
-      sendData()
+      setloading(true);
+      sendData();
     }
   };
 
-const sendData = async () => {
-  try {
-    const res = await axios.post(`${serverUrl}/create`, userData)
-    setloading(false)
-    setcreated(true)
-    setstatus("User Created")
-    setuserData({
-      name: "",
-      email: "",
-      url: ""
-    })
-    setTimeout(() => {
-      setstatus("")
-      setcreated(false)
-    }, 1000)
-  } catch (err) {
-    if (err.response && err.response.data && err.response.data.msg) {
-      setstatus(err.response.data.msg) 
-      setloading(false)// Show limiter message
-    } else {
-      setstatus("Something went wrong")
-      setloading(false)
-      console.log("Error Sending Data" + err)
-      return
+  const sendData = async () => {
+    try {
+      const res = await axios.post(`${serverUrl}/create`, userData);
+      setloading(false);
+      setcreated(true);
+      setstatus("User Created");
+      setuserData({
+        name: "",
+        email: "",
+        url: "",
+      });
+      setTimeout(() => {
+        setstatus("");
+        setcreated(false);
+      }, 1000);
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.msg) {
+        setstatus(err.response.data.msg);
+        setloading(false); // Show limiter message
+      } else {
+        setstatus("Something went wrong");
+        setloading(false);
+        console.log("Error Sending Data" + err);
+        return;
+      }
     }
-   
-  }
-}
-function checkImage(url) {
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-}
+  };
 
-// Usage:
-
-
- 
   return (
-    <motion.div 
-    initial={{
-      opacity:0,
-      y:20
-    }}
-    animate={{
-      opacity:1,
-      y:0
-    }}
-    transition={{
-      duration:0.4
-    }}
-    exit={{
-      y:-20,
-      opacity:0
-    }}
-    className="w-full h-full bg-[#090c0c] flex flex-col justify-center items-center gap-5">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.4,
+      }}
+      exit={{
+        y: -20,
+        opacity: 0,
+      }}
+      className="w-full h-full bg-[#090c0c] flex flex-col justify-center items-center gap-5"
+    >
       <h1 className="text-4xl font-medium underline">Create a user</h1>
       <motion.div className="bg-[#0f1417] rounded w-100 p-10 flex flex-col gap-5">
-        <motion.input layout
+        <motion.input
+          layout
           type="text"
           placeholder="Enter name"
           name="name"
@@ -119,7 +104,8 @@ function checkImage(url) {
           }}
           className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
-        <motion.input layout
+        <motion.input
+          layout
           type="text"
           placeholder="Enter Email"
           name="email"
@@ -129,7 +115,8 @@ function checkImage(url) {
           }}
           className="border-2 focus:border-[#9dc9ce] border-zinc-600 rounded px-7 py-2 outline-0"
         ></motion.input>
-        <motion.input layout
+        <motion.input
+          layout
           type="text"
           placeholder="Image url"
           name="url"
@@ -141,49 +128,51 @@ function checkImage(url) {
         ></motion.input>
 
         <div className="flex justify-center items-center">
-           <AnimatePresence> 
-          {loading && (
-            <motion.div 
-            initial={{
-               rotate:0,
-               opacity:0
-            }}
-            animate={{
-               rotate:360,
-               opacity:1
-            }}
-            exit={{opacity:0,
-               transition:{
-                  opacity:0.3
-               }
-            }}
-            transition={{
-               opacity:0.3,
-               ease:'linear',
-               duration:1,
-               repeat:Infinity
-
-            }}
-            className="mr-5 h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"></motion.div>
-          ) 
-         }
-         {status && (
-            <motion.p 
-         initial={{
-            opacity:0
-         }}
-         animate={{
-            opacity:1
-         }}
-         exit={{opacity:0}}
-         transition={{
-            ease:'easeIn'
-         }}
-         
-         className={`text-center ${created ? 'text-[#57bac5]' : 'text-red-600'}  font-medium tracking-wide`}>
-              {status}
-            </motion.p> 
-         )}
+          <AnimatePresence>
+            {loading && (
+              <motion.div
+                initial={{
+                  rotate: 0,
+                  opacity: 0,
+                }}
+                animate={{
+                  rotate: 360,
+                  opacity: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    opacity: 0.3,
+                  },
+                }}
+                transition={{
+                  opacity: 0.3,
+                  ease: "linear",
+                  duration: 1,
+                  repeat: Infinity,
+                }}
+                className="mr-5 h-5 w-5 border-2 border-transparent border-t-white border-r-white rounded-full"
+              ></motion.div>
+            )}
+            {status && (
+              <motion.p
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  ease: "easeIn",
+                }}
+                className={`text-center ${
+                  created ? "text-[#57bac5]" : "text-red-600"
+                }  font-medium tracking-wide`}
+              >
+                {status}
+              </motion.p>
+            )}
           </AnimatePresence>
         </div>
         <button
@@ -193,7 +182,10 @@ function checkImage(url) {
           CREATE
         </button>
       </motion.div>
-      <Link to='/users' className="text-[#2f777f] flex items-center gap-2"><FaEye/>View Users</Link>
+      <Link to="/users" className="text-[#2f777f] flex items-center gap-2">
+        <FaEye />
+        View Users
+      </Link>
     </motion.div>
   );
 };
