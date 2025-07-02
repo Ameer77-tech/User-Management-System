@@ -1,4 +1,4 @@
-MERN User Management App <br>
+# User Management App <br>
 This is a MERN (MongoDB, Express, React, Node.js) full-stack application that allows users to create, view, edit, and delete user details including name, email, and image URL. The frontend includes smooth animations using Framer Motion for a better user experience. <br> <br>
 
 ✨ Features <br>
