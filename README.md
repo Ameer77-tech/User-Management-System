@@ -12,7 +12,7 @@ This is a MERN (MongoDB, Express, React, Node.js) full-stack application that al
 
 # Preview Images 📷
 ![Screenshot 2025-07-02 145924](https://github.com/user-attachments/assets/95f51666-9100-43cb-92f2-bd8947d3629b) <br>
-![Screenshot 2025-07-02 145933](https://github.com/user-attachments/assets/d7b93068-8a45-4477-ac43-3f30cbab808b) <br>
+![Screenshot 2025-07-02 150503](https://github.com/user-attachments/assets/7b39c5cd-6f35-4909-bc78-61785acb7f88) <br>
 ![Screenshot 2025-07-02 150006](https://github.com/user-attachments/assets/72fb4929-f72a-4e4a-98b4-0b21af63bf0b) <br>
 ![Screenshot 2025-07-02 150017](https://github.com/user-attachments/assets/9a584ed4-6a49-4a13-986d-5ae3493a17a7) <br><br>
 
