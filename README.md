@@ -1,47 +1,47 @@
 MERN User Management App <br>
-This is a MERN (MongoDB, Express, React, Node.js) full-stack application that allows users to create, view, edit, and delete user details including name, email, and image URL. The frontend includes smooth animations using Framer Motion for a better user experience.
+This is a MERN (MongoDB, Express, React, Node.js) full-stack application that allows users to create, view, edit, and delete user details including name, email, and image URL. The frontend includes smooth animations using Framer Motion for a better user experience. <br> <br>
 
-✨ Features
-✅ Add new users (Name, Email, Image URL)
-👀 View all users in a clean, responsive UI
-📝 Edit user details
-❌ Delete users
-🎬 Smooth UI animations powered by Framer Motion
-⚙️ Backend with Express.js & MongoDB
-🎯 RESTful API Integration
+✨ Features <br>
+✅ Add new users (Name, Email, Image URL) <br>
+👀 View all users in a clean, responsive UI <br>
+📝 Edit user details <br>
+❌ Delete users <br>
+🎬 Smooth UI animations powered by Framer Motion <br>
+⚙️ Backend with Express.js & MongoDB <br>
+🎯 RESTful API Integration <br> <br>
 
-🚀 Tech Stack
-Frontend: React, Tailwind CSS, Framer Motion
-Backend: Node.js, Express.js
-Database: MongoDB (with Mongoose)
-Other Tools: Axios, dotenv
+🚀 Tech Stack <br>
+Frontend: React, Tailwind CSS, Framer Motion <br>
+Backend: Node.js, Express.js <br>
+Database: MongoDB (with Mongoose) <br>
+Other Tools: Axios, dotenv <br> <br>
 
-📦 Installation
-Prerequisites
-Node.js & npm
-MongoDB installed or MongoDB Atlas URI
+📦 Installation <br>
+Prerequisites <br>
+Node.js & npm <br>
+MongoDB installed or MongoDB Atlas URI <br> <br>
 
 
-Backend Setup
-cd backend
-npm install
-npm run dev
+Backend Setup <br>
+cd backend <br>
+npm install <br>
+npm run dev <br> <br>
 
-Frontend Setup
-cd frontend
-npm install
-npm start
+Frontend Setup <br>
+cd frontend <br>
+npm install <br>
+npm start <br> <br>
 
-🌐 API Endpoints
-POST /create – Create new user
-GET /users – Get all users
-PUT /updateuser/:id – Edit user details
-DELETE /delete/:id – Delete a user
+🌐 API Endpoints <br>
+POST /create – Create new user <br>
+GET /users – Get all users <br>
+PUT /updateuser/:id – Edit user details <br>
+DELETE /delete/:id – Delete a user <br> <br>
 
-🙌 Acknowledgements
-This app was created as a personal project to practice full-stack MERN development and integrate modern animations using Framer Motion.
+🙌 Acknowledgements <br>
+This app was created as a personal project to practice full-stack MERN development and integrate modern animations using Framer Motion. <br><br>
 
-~ Built with ❤️ and ~20-30% assistance from AI tools for guidance and code optimization.
+~ Built with ❤️ and ~20-30% assistance from AI tools for guidance and code optimization. <br> <br>
 
-📄 License
-This project is open-source and free to use under the MIT License.
+📄 License <br>
+This project is open-source and free to use under the MIT License. <br>
