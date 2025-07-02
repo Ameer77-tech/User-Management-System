@@ -17,39 +17,38 @@ This is a MERN (MongoDB, Express, React, Node.js) full-stack application that al
 ![Screenshot 2025-07-02 150017](https://github.com/user-attachments/assets/9a584ed4-6a49-4a13-986d-5ae3493a17a7) <br><br>
 
 
-🚀 Tech Stack <br>
+# 🚀 Tech Stack <br>
 Frontend: React, Tailwind CSS, Framer Motion <br>
 Backend: Node.js, Express.js <br>
 Database: MongoDB (with Mongoose) <br>
-
 Other Tools: Axios, dotenv <br> <br>
 
-📦 Installation <br>
+# 📦 Installation <br>
 Prerequisites <br>
 Node.js & npm <br>
 MongoDB installed or MongoDB Atlas URI <br> <br>
 
 
-Backend Setup <br>
+# Backend Setup <br>
 cd backend <br>
 npm install <br>
 npm run dev <br> <br>
 
-Frontend Setup <br>
+# Frontend Setup <br>
 cd frontend <br>
 npm install <br>
 npm start <br> <br>
 
-🌐 API Endpoints <br>
+# 🌐 API Endpoints <br>
 POST /create – Create new user <br>
 GET /users – Get all users <br>
 PUT /updateuser/:id – Edit user details <br>
 DELETE /delete/:id – Delete a user <br> <br>
 
-🙌 Acknowledgements <br>
+# 🙌 Acknowledgements <br>
 This app was created as a personal project to practice full-stack MERN development and integrate modern animations using Framer Motion. <br><br>
 
 ~ Built with ❤️ and ~20-30% assistance from AI tools for guidance and code optimization. <br> <br>
 
-📄 License <br>
+# 📄 License <br>
 This project is open-source and free to use under the MIT License. <br>
