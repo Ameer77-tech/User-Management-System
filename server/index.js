@@ -29,7 +29,7 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 
 app.get("/", (req, res) => {
-  res.semd("runnning");
+  res.send("runnning");
 });
 
 app.use("/api/auth", authroutes);
