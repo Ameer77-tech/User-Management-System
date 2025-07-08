@@ -1,30 +1,35 @@
 const express = require("express");
 const app = express();
- 
+
 const cors = require("cors");
+app.use(
+  cors({
+    origin: "https://user-management-system-9hc2.onrender.com",
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
+app.options("*", cors());
 
 const posts = require("./models/posts");
 const authroutes = require("./routes/auth.route");
-
 
 const limiter = require("./ratelimit");
 const { body, validationResult } = require("express-validator");
 const cookieParser = require("cookie-parser");
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-    origin: 'https://user-management-system-9hc2.onrender.com',
-    credentials: true
-}));
 
 require("dotenv").config();
 
 const PORT = process.env.PORT;
 
-app.get("/" ,(req, res) => {
-  res.semd("runnning")
+app.get("/", (req, res) => {
+  res.semd("runnning");
 });
 
 app.use("/api/auth", authroutes);
