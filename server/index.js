@@ -1,24 +1,33 @@
 const express = require("express");
 const app = express();
-
+ 
 const cors = require("cors");
 
-const userModel = require("./models/user");
+const posts = require("./models/posts");
+const authroutes = require("./routes/auth.route");
+
 
 const limiter = require("./ratelimit");
 const { body, validationResult } = require("express-validator");
+const cookieParser = require("cookie-parser");
 
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: 'https://user-management-system-9hc2.onrender.com',
+    credentials: true
+}));
 
 require("dotenv").config();
 
 const PORT = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("working");
+app.get("/" ,(req, res) => {
+  res.semd("runnning")
 });
+
+app.use("/api/auth", authroutes);
 
 app.post(
   "/create",
@@ -39,7 +48,7 @@ app.post(
 
     let { name, email, url } = req.body;
     try {
-      let createdUser = await userModel.create({
+      let createdUser = await posts.create({
         name,
         email,
         url,
@@ -54,7 +63,7 @@ app.post(
 
 app.get("/users", async (req, res) => {
   try {
-    let users = await userModel.find();
+    let users = await posts.find();
     res.send({ users });
   } catch (err) {
     console.log("Cannot get Users");
@@ -65,7 +74,7 @@ app.get("/users", async (req, res) => {
 app.delete("/deleteuser/:user", async (req, res) => {
   const id = req.params.user;
   try {
-    let deletedUser = await userModel.findOneAndDelete({ _id: id });
+    let deletedUser = await posts.findOneAndDelete({ _id: id });
     res.send({ deletedUser });
   } catch (err) {
     console.log("Cannot Delete User");
@@ -75,7 +84,7 @@ app.delete("/deleteuser/:user", async (req, res) => {
 app.get("/updateuser/:id", async (req, res) => {
   const _id = req.params.id;
   try {
-    const user = await userModel.findOne({ _id });
+    const user = await posts.findOne({ _id });
     res.send({ user });
   } catch (err) {
     console.log("Error fetching user" + err);
@@ -86,7 +95,7 @@ app.put("/updateuser/:userid", async (req, res) => {
   const id = req.params.userid;
   const { name, email, url } = req.body;
   try {
-    const updatedUser = await userModel.findOneAndUpdate(
+    const updatedUser = await posts.findOneAndUpdate(
       { _id: id },
       {
         name,
@@ -99,14 +108,16 @@ app.put("/updateuser/:userid", async (req, res) => {
     console.log("Error Updating User");
   }
 });
+
 app.delete("/deleteallusers", async (req, res) => {
   try {
-    const response = await userModel.deleteMany({});
+    const response = await posts.deleteMany({});
     res.send(response);
   } catch (err) {
     console.log("Error deleting Users" + err);
   }
 });
+
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
