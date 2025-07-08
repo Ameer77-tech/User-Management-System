@@ -11,7 +11,7 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
-app.options("*", cors());
+
 
 const posts = require("./models/posts");
 const authroutes = require("./routes/auth.route");
